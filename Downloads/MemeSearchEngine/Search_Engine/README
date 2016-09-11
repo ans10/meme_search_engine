@@ -1,0 +1,31 @@
+Web Page Location
+=================
+http://cims.nyu.edu/~ms8599/search.html
+
+INSTALL  
+=======
+1. First make sure pylucene is installed and can be found on PYTHONPATH.  
+
+2. The indexer is called parse.py. It can be run like: 
+    `python parse.py <path to image->ocr file> <path to image->labels file> <path to index>`
+
+   For example (using the provided files) (make sure a directory called index exists):
+    python parse.py image2text labels index
+    
+   The image->ocr file is output by the OCR.ipynb file.
+   The image->labels file is output by the Meme_Classifier/generate_labels.lua file.
+    
+3. Download the crawled images tar file from this url: https://www.dropbox.com/s/lyfbz2bmlf7yzgc/common_image_base.tar.gz. It's approximately 450 MBs in size.
+
+4. Extract it in the directory in which this README is located. Make sure its name is "common_image_base". Also, make sure untarring doesn't create nested folders. All the crawled images should be directly under "common_image_base". This is necessary for links to work. 
+
+5. Don't disturb the file structure of the other files to make sure the links work. 
+
+6. Modify index path in search.cgi if needed. 
+
+7. Now run a cgi server on your system with present working directory as the directory in which this file (README) is contained:
+    `python -m CGIHTTPServer`
+    
+8. Browse to:
+    `localhost:8000/search.html`
+    

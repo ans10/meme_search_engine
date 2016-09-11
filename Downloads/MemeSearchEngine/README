@@ -1,0 +1,45 @@
+Web Page Location
+=================
+http://cims.nyu.edu/~ms8599/search.html
+
+INSTALL
+=======
+Look at the README in the Search_Engine folder to run the actual search engine. The report can be found in the file called "MemeSearch.pdf". To view the itorch and ipython notebooks install jupyter.
+
+Description of attached files
+=============================
+Search_Engine - Directory contains files related to the actual search engine. Use the README in this folder for information on how to run the search engine.
+MemeCrawler.py - File to crawl subreddits for memes. We assume the subreddits only contain memes.
+MemeTypeCrawler.py - File crawls imgflip.com for meme categories and corresponding blank images.
+OCR.ipynb - iPython notebook to demonstrate the usage of Microsoft OCR API.
+Meme_Classifier/Feature_Generation.ipynb - iTorch notebook to demonstrate feature generation from memes generated via memegen.
+Meme_Classifier/Train_and_Test.ipynb - iTorch notebook to demonstrate training and testing of meme classifier. 
+Meme_Classifier/gen_labels.lua - Uses the trained classifier to generate labels for images crawled from subrredits. 
+https://github.com/mayanks43/memegen - The meme generator we used to generate images per meme category given a blank image.
+
+OCR Pipeline
+============
+1. Use MemeCrawler.py to crawl subreddits for meme images. Save these files in a folder called common_image_base. We also provide our crawled images on dropbox. Download it as follows:
+    
+    $ wget https://www.dropbox.com/s/lyfbz2bmlf7yzgc/common_image_base.tar.gz
+    
+2. Use OCR.ipynb to extract texts from the images in common_image_base folder. This is saved as image2text file in the Search_Engine folder.
+
+Meme Classifier Pipeline
+========================
+1. Use MemeTypeCrawler.py to download meme image categories in folder. 
+
+2. Clone memegen (linked above). Install any requirements and run the script run_all.sh to generate dataset for classification. 
+
+3. Use Feature_Generation.ipynb to generate features for the classifier dataset (saved in "meme_features.t7"). Note that you'll need a GPU and torch installed to be able to run this iTorch notebook. You can run this on CPU as well if you replace the gpu specific statements. 
+
+4. Use Train_and_Test.ipynb and meme_features.t7 to train a logistic classifier on the meme image categories crawled in the 1st step. You'll get a model file called "memeclassifier" as output. 
+
+5. Now, use generate_labels.lua and "memeclassifier" to generate labels for images crawled from the subreddits. This is saved as labels file in the Search_Engine folder.
+
+Search Engine Pipeline
+======================
+Refer to README present in the Search_Engine folder for this.
+
+Hope you like it!
+
